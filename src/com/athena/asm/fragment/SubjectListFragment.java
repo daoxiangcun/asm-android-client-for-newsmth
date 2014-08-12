@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -36,8 +37,9 @@ import com.athena.asm.util.task.LoadSubjectTask;
 import com.athena.asm.viewmodel.BaseViewModel;
 import com.athena.asm.viewmodel.HomeViewModel;
 import com.athena.asm.viewmodel.SubjectListViewModel;
-import com.markupartist.android.widget.PullToRefreshListView;
-import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 public class SubjectListFragment extends SherlockFragment implements OnClickListener,
         android.content.DialogInterface.OnClickListener, BaseViewModel.OnViewModelChangObserver {
@@ -198,12 +200,10 @@ public class SubjectListFragment extends SherlockFragment implements OnClickList
                 }
             });
 
-            m_listView.setOnRefreshListener(new OnRefreshListener() {
-
+            m_listView.setOnRefreshListener(new OnRefreshListener<ListView>() {
                 @Override
-                public void onRefresh() {
+                public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                     refreshSubjectList();
-                    m_listView.onRefreshComplete();
                 }
             });
 
@@ -340,6 +340,7 @@ public class SubjectListFragment extends SherlockFragment implements OnClickList
     public void onViewModelChange(BaseViewModel viewModel, String changedPropertyName, Object... params) {
         if (changedPropertyName.equals(SubjectListViewModel.SUBJECTLIST_PROPERTY_NAME)) {
             reloadSubjectList();
+            m_listView.onRefreshComplete();
             if (m_progressDialogProvider != null) {
                 m_progressDialogProvider.dismissProgressDialog();
             }
@@ -349,9 +350,9 @@ public class SubjectListFragment extends SherlockFragment implements OnClickList
     private void setListOffsetByPage(int jump) {
         int offset = (int) (m_listView.getHeight() * 0.95);
         if (jump == -1) {
-            m_listView.smoothScrollBy(-1 * offset, 500);
+            m_listView.getRefreshableView().smoothScrollBy(-1 * offset, 500);
         } else {
-            m_listView.smoothScrollBy(offset, 500);
+            m_listView.getRefreshableView().smoothScrollBy(offset, 500);
         }
     }
 

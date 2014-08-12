@@ -277,8 +277,7 @@ public class PostListAdapter extends BaseAdapter implements OnClickListener, Sec
     public void onClick(View v) {
         // TODO Auto-generated method stub
         Intent intent = new Intent();
-        intent.setClassName("com.athena.asm",
-                "com.athena.asm.FullImageActivity");
+        intent.setClassName("com.athena.asm", "com.athena.asm.FullImageActivity");
         int attachmentIdx = (Integer) v.getTag(R.id.tag_first);
         @SuppressWarnings("unchecked")
         ArrayList<Attachment> attachments = (ArrayList<Attachment>) v.getTag(R.id.tag_second);
