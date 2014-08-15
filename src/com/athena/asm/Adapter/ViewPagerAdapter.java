@@ -1,7 +1,5 @@
 package com.athena.asm.Adapter;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -12,32 +10,31 @@ import android.widget.LinearLayout;
 
 import com.athena.asm.R;
 import com.athena.asm.aSMApplication;
-import com.athena.asm.view.TouchImageView;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
-public class ViewPagerAdapter extends PagerAdapter {
+import uk.co.senab.photoview.PhotoView;
 
-//	private TouchImageView m_currentView;
-    private Context m_context;
-    ArrayList<String> m_imageUrls;
+import java.util.ArrayList;
+
+public class ViewPagerAdapter extends PagerAdapter {
+    private Context mContext;
+    ArrayList<String> mImageUrls;
 
     public ViewPagerAdapter(ArrayList<String> imgUrls, Context context) {
-        m_imageUrls = imgUrls;
-        m_context = context;
+        mImageUrls = imgUrls;
+        mContext = context;
     }
 
     @Override
     public int getCount() {
-        if(m_imageUrls != null)
-            return m_imageUrls.size();
+        if(mImageUrls != null)
+            return mImageUrls.size();
         return 0;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        TouchImageView view = (TouchImageView)object;
-        ((ViewPager) container).removeView(view);
-        view = null;
+        container.removeView((View)object);
     }
 
     @Override
@@ -54,11 +51,11 @@ public class ViewPagerAdapter extends PagerAdapter {
         UrlImageViewHelper.setUseZoomOut(false); // don't zoom out
         UrlImageViewHelper.setMaxImageSize(0); // load all size
 
-        // initialize TouchImageView
-        String imageUrl = m_imageUrls.get(position);
-        TouchImageView iv = new TouchImageView(m_context);
+        // initialize PhotoView
+        String imageUrl = mImageUrls.get(position);
+        PhotoView iv = new PhotoView(mContext);
         iv.setLayoutParams(mParams);
-        iv.setOnLongClickListener((OnLongClickListener)m_context);
+        iv.setOnLongClickListener((OnLongClickListener)mContext);
         if (aSMApplication.getCurrentApplication().isNightTheme()) {
             UrlImageViewHelper.setErrorResource(R.drawable.failure_night);
             UrlImageViewHelper.setUrlDrawable(iv, imageUrl, R.drawable.loading_night);

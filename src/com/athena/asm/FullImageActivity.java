@@ -1,24 +1,12 @@
 package com.athena.asm;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.commons.io.FileUtils;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.media.ExifInterface;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -32,9 +20,21 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.athena.asm.Adapter.ViewPagerAdapter;
 import com.athena.asm.util.StringUtility;
-import com.athena.asm.view.MyViewPager;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.viewpagerindicator.CirclePageIndicator;
+
+import org.apache.commons.io.FileUtils;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class FullImageActivity extends Activity
     implements OnLongClickListener {
@@ -62,7 +62,7 @@ public class FullImageActivity extends Activity
         return super.onKeyUp(keyCode, event);
     }
 
-    private MyViewPager mViewPager;
+    private ViewPager mViewPager;
     private ViewPagerAdapter vpAdapter;
 
     // pagination navigator current position
@@ -85,7 +85,7 @@ public class FullImageActivity extends Activity
         m_imageUrls = getIntent().getStringArrayListExtra (StringUtility.IMAGE_URL);
         m_imageIdx = getIntent().getIntExtra(StringUtility.IMAGE_INDEX, 0);
 
-        mViewPager = (MyViewPager) findViewById(R.id.myviewpager);
+        mViewPager = (ViewPager) findViewById(R.id.myviewpager);
         vpAdapter = new ViewPagerAdapter(m_imageUrls, this);
         mViewPager.setAdapter(vpAdapter);
         mViewPager.setCurrentItem(m_imageIdx);
