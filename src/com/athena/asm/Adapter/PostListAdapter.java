@@ -1,12 +1,6 @@
 package com.athena.asm.Adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -28,10 +22,14 @@ import com.athena.asm.aSMApplication;
 import com.athena.asm.data.Attachment;
 import com.athena.asm.data.Post;
 import com.athena.asm.fragment.PostListFragment;
+import com.athena.asm.util.NetworkUtil;
 import com.athena.asm.util.StringUtility;
 import com.athena.asm.view.GifWebView;
 import com.athena.asm.view.LinkTextView;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostListAdapter extends BaseAdapter implements OnClickListener, SectionIndexer{
 
@@ -106,13 +104,13 @@ public class PostListAdapter extends BaseAdapter implements OnClickListener, Sec
         if( !isAutoOptimize )
             return 0;
 
-        Context context = aSMApplication.getCurrentApplication().getApplicationContext();
-        ConnectivityManager connectionManager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectionManager.getActiveNetworkInfo();
-        int netType = networkInfo.getType();
-        // WIFI下全部下载
-        if (netType == ConnectivityManager.TYPE_WIFI) {
+        // 网络未连接
+        if(!NetworkUtil.isConnected()){
+            return 0;
+        }
+
+        // 免费WIFI下全部下载
+        if(NetworkUtil.isWifiConnected() && !NetworkUtil.isNetworkMetered()){
             return 0;
         }
 
@@ -189,7 +187,6 @@ public class PostListAdapter extends BaseAdapter implements OnClickListener, Sec
                 UrlImageViewHelper.setUseZoomIn(true);
             }
 
-            // TODO: pass screen orientation to UrlImageViewHelper
             for (int i = 0; i < attachments.size(); i++) {
                 Attachment attachment = attachments.get(i);
                 String attachUrl = attachment.getAttachUrl();
@@ -275,7 +272,6 @@ public class PostListAdapter extends BaseAdapter implements OnClickListener, Sec
 
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
         Intent intent = new Intent();
         intent.setClassName("com.athena.asm", "com.athena.asm.FullImageActivity");
         int attachmentIdx = (Integer) v.getTag(R.id.tag_first);
@@ -295,19 +291,16 @@ public class PostListAdapter extends BaseAdapter implements OnClickListener, Sec
 
     @Override
     public int getPositionForSection(int section) {
-        // TODO Auto-generated method stub
         return section;
     }
 
     @Override
     public int getSectionForPosition(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
     @Override
     public Object[] getSections() {
-        // TODO Auto-generated method stub
         return sections;
     }
 }
