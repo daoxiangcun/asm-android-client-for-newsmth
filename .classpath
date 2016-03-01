@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+<<<<<<< HEAD
   <classpathentry combineaccessrules="false" exported="true" kind="src" path="/AndroidPullToRefresh"/>
   <classpathentry combineaccessrules="false" exported="true" kind="src" path="/ViewPagerIndicator"/>
   <classpathentry combineaccessrules="false" exported="true" kind="src" path="/com_actionbarsherlock"/>
@@ -12,4 +13,17 @@
   <classpathentry exported="true" kind="lib" path="libs/httpmime-4.0-beta2.jar"/>
   <classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
   <classpathentry kind="output" path="bin/classes"/>
+=======
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/ViewPagerIndicator"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/com_actionbarsherlock"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/aFileChooser"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="lib" path="libs/apache-mime4j-0.5.jar"/>
+	<classpathentry kind="lib" path="libs/httpmime-4.0-beta2.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="output" path="bin/classes"/>
+>>>>>>> 9c7890d3be66f443ba38d6f498fd53e7a0132a4d
 </classpath>

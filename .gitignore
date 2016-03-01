@@ -11,5 +11,11 @@ local.properties
 /libs/ActionBarSherlock/gen
 /libs/ViewPagerIndicator/bin
 /libs/ViewPagerIndicator/gen
+<<<<<<< HEAD
 /libs/AndroidPullToRefresh/bin
 /libs/AndroidPullToRefresh/gen
+=======
+/libs/drag-sort-listview/bin
+/libs/drag-sort-listview/gen
+.DS_STORE
+>>>>>>> 9c7890d3be66f443ba38d6f498fd53e7a0132a4d

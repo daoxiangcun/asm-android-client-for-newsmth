@@ -4,6 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+<<<<<<< HEAD
     <!-- Body -->
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/subject_list"
@@ -15,3 +16,20 @@
     <include layout="@layout/post_list_footer" />
 
 </LinearLayout>
+=======
+	<!-- Body -->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+        <ListView android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/subject_list" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!-- footer -->
+	<include layout="@layout/post_list_footer" />
+
+</LinearLayout>
+>>>>>>> 9c7890d3be66f443ba38d6f498fd53e7a0132a4d

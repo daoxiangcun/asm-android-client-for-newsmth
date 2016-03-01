@@ -1,5 +1,18 @@
 package com.koushikdutta.urlimageviewhelper;
 
+<<<<<<< HEAD
+=======
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+>>>>>>> 9c7890d3be66f443ba38d6f498fd53e7a0132a4d
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -209,4 +222,8 @@ public class HttpUrlDownloader implements UrlDownloader {
         }
         return true;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 9c7890d3be66f443ba38d6f498fd53e7a0132a4d

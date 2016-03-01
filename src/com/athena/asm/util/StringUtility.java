@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.athena.asm.data.Profile;
 import com.athena.asm.aSMApplication;
+import com.athena.asm.data.Profile;
 
 public class StringUtility {
 
@@ -265,6 +265,8 @@ public class StringUtility {
         }
 
         String result = sb.toString().trim();
+        // remove last <br />
+        result = result.replaceAll("<br />$", "");
         return new Object[] {result, attachList};
     }
 

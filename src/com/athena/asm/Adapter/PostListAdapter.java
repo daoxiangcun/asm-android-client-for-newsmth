@@ -95,6 +95,7 @@ public class PostListAdapter extends BaseAdapter implements OnClickListener, Sec
         m_fragment.getListView().setFastScrollEnabled(false);
         m_fragment.getListView().setFastScrollEnabled(true);
         m_fragment.getListView().setFastScrollAlwaysVisible(true);
+<<<<<<< HEAD
     }
 
     // image size > threshold won't be loaded in 2G/3G
@@ -138,6 +139,54 @@ public class PostListAdapter extends BaseAdapter implements OnClickListener, Sec
             holder.post = post;
 
             int fontSize = aSMApplication.getCurrentApplication().getPostFontSize();
+=======
+	}
+
+	// image size > threshold won't be loaded in 2G/3G
+	private int getMaxImageSize() {
+		boolean isAutoOptimize = aSMApplication.getCurrentApplication().isAutoOptimize();
+		// 非自动优化
+		if( !isAutoOptimize )
+			return 0;
+
+		Context context = aSMApplication.getCurrentApplication().getApplicationContext();
+		ConnectivityManager connectionManager =
+				(ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connectionManager.getActiveNetworkInfo();
+		if (networkInfo == null)
+			// no active network connection
+			return 0;
+		int netType = networkInfo.getType();
+		// WIFI下全部下载
+		if (netType == ConnectivityManager.TYPE_WIFI) {
+			return 0;
+		}
+
+		// 自动优化且在移动网络中，返回阈值
+		float threshold = aSMApplication.getCurrentApplication().getImageSizeThreshold();
+		return (int)threshold * 1024;
+	}
+
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder;
+		RelativeLayout layout = null;
+		Post post = m_postList.get(position);
+		
+		if (convertView == null) {
+			layout = (RelativeLayout) m_inflater.inflate(R.layout.post_list_item, null);
+			holder = new ViewHolder();
+			holder.authorTextView = (TextView) layout.findViewById(R.id.AuthorID);
+			holder.indexTextView = (TextView) layout.findViewById(R.id.PostIndex);
+			holder.titleTextView = (TextView) layout.findViewById(R.id.PostTitle);
+			holder.lineView = (View) layout.findViewById(R.id.SeperatorView);
+			holder.contentTextView = (LinkTextView) layout.findViewById(R.id.PostContent);
+			holder.attachTextView = (TextView) layout.findViewById(R.id.PostAttach);
+			holder.imageLayout = (LinearLayout) layout.findViewById(R.id.imageLayout);
+			holder.dateTextView = (TextView) layout.findViewById(R.id.PostDate);
+			holder.post = post;
+			
+			int fontSize = aSMApplication.getCurrentApplication().getPostFontSize();
+>>>>>>> 9c7890d3be66f443ba38d6f498fd53e7a0132a4d
             holder.indexTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, fontSize - 2);
             holder.authorTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, fontSize - 2);
             holder.titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, fontSize - 2);
@@ -172,6 +221,7 @@ public class PostListAdapter extends BaseAdapter implements OnClickListener, Sec
         // Vt100TerminalModel.handleContent(post.getContent(), holder.contentTextView);
         Linkify.addLinks(holder.contentTextView, Linkify.WEB_URLS | Linkify.EMAIL_ADDRESSES);
 
+<<<<<<< HEAD
         holder.attachTextView.setMovementMethod(LinkMovementMethod.getInstance());
         ArrayList<Attachment> attachments = post.getAttachFiles();
         if (attachments != null) {
@@ -189,6 +239,26 @@ public class PostListAdapter extends BaseAdapter implements OnClickListener, Sec
 
             for (int i = 0; i < attachments.size(); i++) {
                 Attachment attachment = attachments.get(i);
+=======
+		holder.attachTextView.setMovementMethod(LinkMovementMethod.getInstance());
+		ArrayList<Attachment> attachments = post.getAttachFiles();
+		if (attachments != null) {
+			holder.imageLayout.removeAllViews();
+			StringBuilder contentBuilder = new StringBuilder();
+			contentBuilder.append("");
+
+			if (attachments.size() >= 16){
+				// 如果照片数量多余16张，不再放大图片
+				UrlImageViewHelper.setUseZoomIn(false);
+			}
+			else{
+				UrlImageViewHelper.setUseZoomIn(true);
+			}
+
+			// TODO: pass screen orientation to UrlImageViewHelper
+			for (int i = 0; i < attachments.size(); i++) {
+				Attachment attachment = attachments.get(i);
+>>>>>>> 9c7890d3be66f443ba38d6f498fd53e7a0132a4d
                 String attachUrl = attachment.getAttachUrl();
                 contentBuilder.append("<a href='").append(attachUrl).append("'>");
                 contentBuilder.append(attachment.getName()).append("</a><br/>");

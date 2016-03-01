@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+<<<<<<< HEAD
   <classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
   <classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
   <classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
   <classpathentry kind="src" path="src"/>
   <classpathentry kind="src" path="gen"/>
   <classpathentry kind="output" path="bin/classes"/>
+=======
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="output" path="bin/classes"/>
+>>>>>>> 9c7890d3be66f443ba38d6f498fd53e7a0132a4d
 </classpath>
